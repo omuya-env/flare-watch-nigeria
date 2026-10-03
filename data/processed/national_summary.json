@@ -1,0 +1,49 @@
+{
+  "emission_factor_t_co2e_per_m3": 0.00257,
+  "kwh_thermal_per_m3": 10.55,
+  "plant_efficiency": 0.38,
+  "household_kwh_per_year": 250,
+  "coverage": {
+    "first_year": 2012,
+    "last_year": 2025
+  },
+  "peak_year": {
+    "year": 2012,
+    "bcm": 9.275499294403994,
+    "co2e_mt": 23.838033186618265
+  },
+  "latest_year": {
+    "year": 2025,
+    "bcm": 6.60080617732163,
+    "co2e_mt": 16.964071875716584,
+    "active_sites": 259,
+    "homes_equivalent": 105850527.85952966
+  },
+  "cumulative": {
+    "bcm": 101.30542912402493,
+    "co2e_mt": 260.35495284874406,
+    "homes_equivalent": 1624533861.4328637
+  },
+  "cross_check": {
+    "source": "World Bank country workbook",
+    "years_compared": 14,
+    "mean_difference_pct": 4.084755444486279e-14,
+    "max_difference_pct": 8.707865045710708e-14,
+    "per_year": {
+      "2012": 0.0,
+      "2013": 0.0,
+      "2014": 0.0,
+      "2015": 0.0,
+      "2016": 0.0,
+      "2017": 0.0,
+      "2018": 0.0,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0
+    }
+  }
+}
