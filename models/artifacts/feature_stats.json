@@ -1,0 +1,32 @@
+{
+  "features": [
+    "BCM",
+    "bcm_yoy_change",
+    "ratio_to_site_median",
+    "detection_freq",
+    "avg_temp_k",
+    "gap_years",
+    "volume_zscore",
+    "persistence_zscore"
+  ],
+  "medians": {
+    "BCM": 0.0033024027198386,
+    "bcm_yoy_change": -0.0535623654878764,
+    "ratio_to_site_median": 1.0,
+    "detection_freq": 0.6627105,
+    "avg_temp_k": 1702.07,
+    "gap_years": 0.0,
+    "volume_zscore": -0.2597025262117363,
+    "persistence_zscore": 0.25734355992079144
+  },
+  "missing_counts": {
+    "BCM": 0,
+    "bcm_yoy_change": 2734,
+    "ratio_to_site_median": 182,
+    "detection_freq": 5341,
+    "avg_temp_k": 5341,
+    "gap_years": 0,
+    "volume_zscore": 0,
+    "persistence_zscore": 5341
+  }
+}
