@@ -166,6 +166,18 @@ def test_built_panel_is_dense_and_zero_filled():
     assert panel["BCM"].min() >= 0
 
 
+@pytest.mark.skipif(not config.CO2E_CSV.exists(), reason="pipeline output not built yet")
+def test_co2e_file_is_not_stale_relative_to_panel():
+    """The CO2e file is written from the panel, so its volumes must still match row for row."""
+    panel = pd.read_csv(config.PANEL_CSV).sort_values(["id", "year"]).reset_index(drop=True)
+    co2e = pd.read_csv(config.CO2E_CSV).sort_values(["id", "year"]).reset_index(drop=True)
+    assert len(panel) == len(co2e)
+    assert panel["BCM"].to_numpy() == pytest.approx(co2e["BCM"].to_numpy())
+    for column in ("site_median_bcm", "ratio_to_site_median", "dark_run", "gap_years"):
+        if column in panel.columns and column in co2e.columns:
+            assert panel[column].fillna(-1).to_numpy() == pytest.approx(co2e[column].fillna(-1).to_numpy()), f"{column} is stale in {config.CO2E_CSV.name}"
+
+
 @pytest.mark.skipif(not config.NATIONAL_JSON.exists(), reason="pipeline output not built yet")
 def test_national_summary_has_headline_numbers():
     import json
