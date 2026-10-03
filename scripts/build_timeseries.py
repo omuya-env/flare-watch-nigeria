@@ -147,6 +147,7 @@ def add_features(panel: pd.DataFrame) -> pd.DataFrame:
     panel["bcm_yoy_change"] = (panel["BCM"] - previous) / previous.where(previous > 0)
     flaring_history = panel["BCM"].where(panel["active"])
     trailing = flaring_history.groupby(panel["id"]).transform(lambda s: s.shift(1).rolling(3, min_periods=1).median())
+    panel["trailing_median_bcm"] = trailing
     panel["volume_spike"] = panel["active"] & (trailing > 0) & (panel["BCM"] >= 3.0 * trailing)
 
     year_mean = panel.groupby("year")["BCM"].transform("mean")

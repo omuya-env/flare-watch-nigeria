@@ -39,7 +39,7 @@ FEATURE_LABELS = {
 
 RULES = {
     "relight": ("Relight", "flaring restarted after {gap_years} dark year(s)"),
-    "volume_spike": ("Volume spike", "volume {ratio:.1f}x its own recent normal"),
+    "volume_spike": ("Volume spike", "volume {ratio:.1f}x its own recent normal"),  # ratio is against the trailing three flaring years
     "extended_shutdown": ("Extended shutdown", "{dark_run} consecutive dark years after flaring"),
     "high_persistence": ("Persistent flare", "detected in {detection_freq:.0%} of clear-sky passes"),
     "new_site": ("New site", "first flare ever seen at this site"),
@@ -104,7 +104,9 @@ def rule_tags(row: pd.Series) -> list[str]:
                 years = int(row["gap_years"])
                 tags.append(f"Relight: flaring restarted after {years} dark year{'s' if years != 1 else ''}")
             elif key == "volume_spike":
-                tags.append(f"Volume spike: {template.format(ratio=float(row['ratio_to_site_median']))}")
+                trailing = float(row.get("trailing_median_bcm", float("nan")))
+                ratio = float(row["BCM"]) / trailing if trailing > 0 else float("nan")
+                tags.append(f"Volume spike: volume {ratio:.1f}x its own recent normal")
             elif key == "extended_shutdown":
                 tags.append(f"Extended shutdown: {template.format(dark_run=int(row['dark_run']))}")
             elif key == "high_persistence":

@@ -65,7 +65,7 @@ tests/             unit tests for the continuity rules and conversions
 | [geoBoundaries ADM1](https://www.geoboundaries.org/) | CC BY 4.0 | Nigeria state polygons |
 | [OpenStreetMap via Overpass](https://overpass-api.de/) | ODbL | Nearest named settlement to each site |
 
-Flare volumes originate from NOAA VIIRS satellite observations processed by the Earth Observation Group at the Payne Institute, then calibrated against country-level reporting. Full method, formulas and limitations are in [EXPLANATION.md](EXPLANATION.md).
+Flare volumes originate from NOAA VIIRS satellite observations processed by the Earth Observation Group at the Payne Institute, then calibrated against country-level reporting.
 
 ## Assumptions
 

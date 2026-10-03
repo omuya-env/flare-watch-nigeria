@@ -1,5 +1,7 @@
 """Unit tests for the continuity rules, the conversions and the explanation builder."""
 
+import ast
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -147,6 +149,19 @@ def test_describe_feature_uses_reader_units():
     assert "bcm" in describe_feature(MODEL_FEATURES.index("BCM"), 0.02, 0.005)
     assert "clear-sky passes" in describe_feature(MODEL_FEATURES.index("detection_freq"), 0.2, 0.6)
     assert "standard deviations above" in describe_feature(MODEL_FEATURES.index("volume_zscore"), 3.0, 0.0)
+
+
+@pytest.mark.skipif(not config.ANOMALIES_CSV.exists(), reason="pipeline output not built yet")
+def test_every_reported_spike_is_actually_a_spike():
+    """A flag described as a spike must report a ratio of at least three times its own normal."""
+    anomalies = pd.read_csv(config.ANOMALIES_CSV)
+    tagged = anomalies[anomalies["rule_tags"].fillna("").str.contains("Volume spike")]
+    assert len(tagged) > 0
+    for value in tagged["rule_tags"]:
+        for tag in ast.literal_eval(value):
+            if tag.startswith("Volume spike"):
+                ratio = float(tag.split("volume ")[1].split("x")[0])
+                assert ratio >= 3.0, f"spike reported below 3x: {tag}"
 
 
 def test_rule_tags_render_readable_text():
